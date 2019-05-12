@@ -13,9 +13,6 @@ def calcOrgRait(socialNetwork: str, theme: str):
     usersWeight = getUsersWeight(posts)
     tonesList = [CalcTone(post[0]) for user, post in posts.items()]
     posts = [post[0] for post in posts.values()]
-    check = getAdvAndDis(tonesList, usersWeight, posts)
-    print(check[0])
-    print(check[1])
     return sum([tonesList[i] * usersWeight[i] for i in range(n)]) / n, usersWeight, tonesList
 
 
