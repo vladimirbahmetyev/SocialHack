@@ -1,9 +1,10 @@
-from siteParser import getPosts
-from siteParser import gencsv
-from userValidator import getUsersWeight
-from ML import CalcTone
 import matplotlib.pyplot as plt
 import numpy as np
+
+from ML import CalcTone
+from siteParser import getPosts
+from userValidator import getUsersWeight
+
 
 def calcOrgRait(socialNetwork: str, theme: str):
     posts = getPosts(url=socialNetwork, query=theme)
