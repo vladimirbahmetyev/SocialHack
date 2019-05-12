@@ -30,7 +30,7 @@ def frontend(url, query):
     plt.plot(x, sup)
     plt.show()
 
-frontend("https://twitter.com/search?q=", "мтс")
+#frontend("https://twitter.com/search?q=", "мтс")
 
 
 
