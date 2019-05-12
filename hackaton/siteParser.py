@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 import codecs
 
 
-def getPosts(url: str, query: str, spq: int = 3, spu: int = 3):
+def getPosts(url: str, query: str, spq: int = 0, spu: int = 3):
     browser = webdriver.Chrome()
     # url = "https://twitter.com/search?q="
     # query = "мтс"
@@ -36,7 +36,7 @@ def getPosts(url: str, query: str, spq: int = 3, spu: int = 3):
 
         postsU = [tweet]
         postsU.extend(tweetsU_txt)
-        postsU = set(postsU)
+        postsU = list(set(postsU))
         posts_out[user] = postsU
 
     return posts_out

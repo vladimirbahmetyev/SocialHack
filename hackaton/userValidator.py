@@ -1,9 +1,10 @@
+#TODO rework metric
 from delfunc import prepr
+from ML import CalcTone
 
-
-def getUsersWeight(usersDict, usersList: list):
-    usersWeight = []
-    for user in usersList:
+def getUsersWeight(usersDict):
+    usersWeight = {}
+    for user in usersDict:
         usersPosts = usersDict[user]
 
         postTones = [-CalcTone(prepr(post)) + 2 for post in usersPosts]
@@ -13,9 +14,9 @@ def getUsersWeight(usersDict, usersList: list):
         # 0 - neutral
         # -1 - negative
 
-        averageAbsScore = abs(sum(postTones) / postTones.__len__())
+        averageAbsScore = abs(sum(postTones) / len(postTones))
 
-        if averageAbsScore < 0.5:
+        if averageAbsScore < 0.8:
             continue
 
         usersWeight[user] = 1 - averageAbsScore
@@ -23,12 +24,13 @@ def getUsersWeight(usersDict, usersList: list):
         lengthOfAllPosts = 0
 
         for record in usersDict[user]:
-            lengthOfAllPosts += record.__len__()
+            lengthOfAllPosts += len(record)
 
-        averageRecordLengthInChar = lengthOfAllPosts / sum(usersDict[user].__len__())
+        averageRecordLengthInChar = lengthOfAllPosts / len(usersDict[user])
 
         if averageRecordLengthInChar < 60 or averageRecordLengthInChar > 140:
             continue
 
         usersWeight[user] *= 1 - averageRecordLengthInChar / 100
-    return usersWeight
+    out = [value for value in usersWeight.values()]
+    return out
