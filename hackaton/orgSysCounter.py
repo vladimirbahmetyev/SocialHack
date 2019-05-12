@@ -10,5 +10,5 @@ def calcOrgRait(socialNetwork: str, theme: str):
     tonesList = [CalcTone(post[0]) for user, post in posts.items()]
     return sum([tonesList[i]*usersWeight[i] for i in range(n)])/n
 
-print(calcOrgRait("https://twitter.com/search?q=", "мтс"))
+# print(calcOrgRait("https://twitter.com/search?q=", "мтс"))
 

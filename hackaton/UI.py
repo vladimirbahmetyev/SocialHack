@@ -1,6 +1,7 @@
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
+from orgSysCounter import calcOrgRait
 
 
 class PicButton(QAbstractButton):
@@ -117,6 +118,8 @@ class Example(QWidget):
             print("aaa")
         else:
             self.wrongData.close()
+            if source.lower() == "twitter":
+                calcOrgRait("https://twitter.com/search?q=", key)
 
 
         print(key, source)
@@ -165,7 +168,7 @@ class Example(QWidget):
         self.upButton.clicked.connect(self.upButtonClick)
 
     def twitterClicked(self):
-        self.menuChoice.setText("images/Twitter")
+        self.menuChoice.setText("Twitter")
         self.upButtonClick()
 
     def vkClicked(self):
