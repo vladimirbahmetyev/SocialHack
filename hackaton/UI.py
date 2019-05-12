@@ -1,7 +1,13 @@
 import sys
+
+from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from orgSysCounter import calcOrgRait
+
+# import matplotlib as mpl
+# import matplotlib.pyplot as plt
+# import math
 
 
 class PicButton(QAbstractButton):
@@ -18,7 +24,6 @@ class PicButton(QAbstractButton):
 
 
 class Example(QWidget):
-    items = ["Twitter", "VK", "Facebook", "Instagram", "Otzovik"]
 
     def __init__(self):
         super().__init__()
@@ -69,9 +74,13 @@ class Example(QWidget):
 
         self.goButton = PicButton(QPixmap('images/go.png'), self)
         self.goButton.move(330, 730)
-        self.goButton.resize(180, 180)
-        # goButton.clicked.connect(QCoreApplication.instance().quit)
+        # self.goButton.resize(180, 180)
         self.goButton.clicked.connect(self.on_click)
+
+
+        self.goClicked = PicButton(QPixmap("images/goClicked.png"), self)
+        self.goClicked.move(330, 730)
+        self.goClicked.hide()
 
         self.wrongData = QLabel(self)
         self.wrongData.setPixmap(QPixmap("images/wrong.png"))
@@ -82,13 +91,18 @@ class Example(QWidget):
         palette.setBrush(QPalette.Window, QBrush(oImage))
         self.setPalette(palette)
 
-        rightSquare = QLabel(self)
-        rightSquare.setPixmap(QPixmap("images/rightSquare.png"))
-        rightSquare.move(840, 0)
+        self.rightSquare = QLabel(self)
+        self.rightSquare.setPixmap(QPixmap("images/rightSquare.png"))
+        self.rightSquare.move(840, 0)
+
+        self.doneSquare = QLabel(self)
+        self.doneSquare.setPixmap(QPixmap("images/stats.png"))
+        self.doneSquare.move(840, 0)
+        self.doneSquare.hide()
 
         self.setWindowIcon(QIcon('images/kaka.jpg'))
 
-        self.resize(1900, 1000)
+        self.resize(1980, 1000)
         self.center()
 
         self.setWindowTitle('Супер прилога')
@@ -102,6 +116,15 @@ class Example(QWidget):
         self.move(qr.topLeft())
 
     def on_click(self):
+        self.goButton.hide()
+        self.goClicked.show()
+
+        self._status_update_timer = QTimer(self)
+        self._status_update_timer.setSingleShot(False)
+        self._status_update_timer.timeout.connect(self.changeItem)
+        self._status_update_timer.start(100)
+
+
         key = self.keywordInput.text()
         source = self.resourceInput.text()
 
@@ -116,9 +139,14 @@ class Example(QWidget):
             self.wrongData.close()
             if source.lower() == "twitter":
                 calcOrgRait("https://twitter.com/search?q=", key)
-
+            self.rightSquare.hide()
+            self.doneSquare.show()
 
         print(key, source)
+
+    def changeItem(self):
+        self.goClicked.hide()
+        self.goButton.show()
 
     def downArrowClick(self):
 
