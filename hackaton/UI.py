@@ -173,7 +173,7 @@ class Example(QWidget):
 
                 spam = 0
                 for w in uW:
-                    if w < 0.15:
+                    if w < 0.3:
                         spam += 1
                 spamers = spam / len(uW)
 
