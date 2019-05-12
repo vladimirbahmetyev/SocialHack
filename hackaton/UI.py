@@ -1,15 +1,11 @@
 import sys
 
-from PyQt5 import QtGui
-from PyQt5.QtCore import QTimer
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
-from orgSysCounter import calcOrgRait, frontend
-
-import numpy as np
-import matplotlib as mpl
 import matplotlib.pyplot as plt
-import math
+from PyQt5.QtCore import QTimer
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+from orgSysCounter import calcOrgRait
 
 
 class PicButton(QAbstractButton):
