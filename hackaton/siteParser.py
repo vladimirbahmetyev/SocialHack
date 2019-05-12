@@ -4,11 +4,10 @@ from selenium.webdriver.common.keys import Keys
 import codecs
 
 
-def getPosts(url: str, query: str):
+def getPosts(url: str, query: str, spq: int = 0, spu: int = 3):
     browser = webdriver.Chrome()
     # url = "https://twitter.com/search?q="
     # query = "мтс"
-    spq = 3  # scrolls per query
 
     browser.get(url + query)
     body = browser.find_element_by_tag_name("body")
@@ -26,7 +25,6 @@ def getPosts(url: str, query: str):
     posts_out = {}
 
     for user, tweet in posts.items():
-        spu = 3  # scrolls per user
         url = "https://twitter.com/" + user
         browser.get(url)
         body = browser.find_element_by_tag_name("body")
@@ -38,7 +36,7 @@ def getPosts(url: str, query: str):
 
         postsU = [tweet]
         postsU.extend(tweetsU_txt)
-        postsU = set(postsU)
+        postsU = list(set(postsU))
         posts_out[user] = postsU
 
     return posts_out

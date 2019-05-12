@@ -18,7 +18,6 @@ def prepr(input: str):
     input =  [morph.parse(word)[0].normal_form for word in input.split()]
     with codecs.open("stopwords.txt", 'r', 'utf-8') as file:
         for line in file:
-            print(line)
             stopwords += line
     input = [word for word in input if word not in stopwords]
 
