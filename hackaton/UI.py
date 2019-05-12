@@ -148,25 +148,11 @@ class Example(QWidget):
                 print(rating)                                                       # rating -- рейтинг поискового запроса
                 plt.hist(tL)
                 plt.savefig("graph.png")
-                plt.show()
                 self.graph = QLabel(self)
                 self.graph.setPixmap(QPixmap("graph.png"))
                 # self.graph.resize(530, 400)
                 self.graph.move(1090, 100)
                 self.graph.show()
-
-                # sup = []
-                # n = len(uW)
-                # for i in range(n):
-                #     count = 0
-                #     for j in range(n):
-                #         if uW[j] >= i / n and uW[j] < (i + 1) / n:
-                #             count += 1
-                #     sup.append(count)
-                # x = np.arange(0, 1, 1 / n)
-                # plt.plot(x, sup)
-                # plt.show()
-
                 spam = 0
                 for w in uW:
                     if w < 0.3:
@@ -184,8 +170,6 @@ class Example(QWidget):
 
             self.rightSquare.hide()
             self.doneSquare.show()
-
-        # print(key, source)
 
     def changeItem(self):
         self.goClicked.hide()

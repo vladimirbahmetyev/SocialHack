@@ -10,11 +10,6 @@ def getUsersWeight(usersDict):
 
         postTones = [-CalcTone(prepr(post)) + 2 for post in usersPosts]
 
-        # tones may be
-        # 1 - positive
-        # 0 - neutral
-        # -1 - negative
-
         averageAbsScore = abs(sum(postTones) / len(postTones))
 
         usersWeight[user] = 1 - averageAbsScore
