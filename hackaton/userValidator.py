@@ -1,6 +1,7 @@
 #TODO rework metric
 from delfunc import prepr
 from ML import CalcTone
+import numpy as np
 
 def getUsersWeight(usersDict):
     usersWeight = {}
@@ -16,9 +17,6 @@ def getUsersWeight(usersDict):
 
         averageAbsScore = abs(sum(postTones) / len(postTones))
 
-        if averageAbsScore < 0.8:
-            continue
-
         usersWeight[user] = 1 - averageAbsScore
 
         lengthOfAllPosts = 0
@@ -28,9 +26,9 @@ def getUsersWeight(usersDict):
 
         averageRecordLengthInChar = lengthOfAllPosts / len(usersDict[user])
 
-        if averageRecordLengthInChar < 60 or averageRecordLengthInChar > 140:
-            continue
-
-        usersWeight[user] *= 1 - averageRecordLengthInChar / 100
+        usersWeight[user] *= gaussian(averageRecordLengthInChar, 110, 50)
     out = [value for value in usersWeight.values()]
     return out
+
+def gaussian(x, mu, sig):
+    return np.exp(-np.power(x - mu, 2.) / (2 * np.power(sig, 2.)))
