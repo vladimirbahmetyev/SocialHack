@@ -88,7 +88,7 @@ class Example(QWidget):
 
         self.setWindowIcon(QIcon('images/kaka.jpg'))
 
-        self.resize(1980, 1000)
+        self.resize(1900, 1000)
         self.center()
 
         self.setWindowTitle('Супер прилога')
@@ -104,10 +104,6 @@ class Example(QWidget):
     def on_click(self):
         key = self.keywordInput.text()
         source = self.resourceInput.text()
-
-        # self.wrongData = QLabel()
-        # self.wrongData.setPixmap(QPixmap("wrong.png"))
-        # self.wrongData.move(240, 752)
 
         checkSource = True
         if len(key.strip(" ")) == 0 or len(source) == 0:
