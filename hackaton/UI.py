@@ -175,7 +175,7 @@ class Example(QWidget):
                 for w in uW:
                     if w < 0.3:
                         spam += 1
-                spamers = spam / len(uW)
+                spamers = spam / len(uW) * 100
 
                 self.totalSpam = QLineEdit(self)
                 self.totalSpam.setStyleSheet("QLineEdit {color:rgba(96, 2, 62, 1)}")
