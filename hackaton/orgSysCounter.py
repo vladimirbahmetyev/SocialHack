@@ -1,5 +1,6 @@
 from siteParser import getPosts
 from siteParser import gencsv
+from advantagesAndDisadvantagesAnalizer import getAdvAndDis
 from userValidator import getUsersWeight
 from ML import CalcTone
 import matplotlib.pyplot as plt
@@ -10,6 +11,11 @@ def calcOrgRait(socialNetwork: str, theme: str):
     n = len(posts)
     usersWeight = getUsersWeight(posts)
     tonesList = [CalcTone(post[0]) for user, post in posts.items()]
+    posts = [post[0] for post in posts.values()]
+    #print(posts)
+    top, bot = getAdvAndDis(tonesList, usersWeight, posts)
+    #print(top)
+    #print(bot)
     return sum([tonesList[i]*usersWeight[i] for i in range(n)])/n, usersWeight, tonesList
 
 def frontend(url, query):

@@ -152,7 +152,7 @@ class Example(QWidget):
                 print(rating)                                                       # rating -- рейтинг поискового запроса
                 plt.hist(tL)
                 plt.savefig("graph.png")
-                plt.show()
+                #plt.show()
                 self.graph = QLabel(self)
                 self.graph.setPixmap(QPixmap("graph.png"))
                 # self.graph.resize(530, 400)
