@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 import codecs
 
 
-def getPosts(url: str, query: str, spq: int = 0, spu: int = 3):
+def getPosts(url: str, query: str, spq: int = 0, spu: int = 0):
     browser = webdriver.Chrome()
 
     browser.get(url + query)

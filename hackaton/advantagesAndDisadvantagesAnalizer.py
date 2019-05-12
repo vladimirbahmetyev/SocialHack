@@ -8,18 +8,19 @@ def getAdvAndDis(tonesList, usersWeight, posts):
     n = len(tonesList)
     for i in range(n):
         if tonesList[i] > 2.4 and usersWeight[i] > 0.6:
-            advantages.append(prepr(posts[i]))
+            advantages.extend(prepr(posts[i]))
         if CalcTone(posts[i]) < 1.5 and usersWeight[i] > 0.6:
-            disAdvantages.append(prepr(posts[i]))
 
+            disAdvantages.extend(prepr(posts[i]))
     cleanAdvantages = advantages.copy()
     cleanAdvantages = list(set(cleanAdvantages))
-    top = [advantages.count(cleanAdvantages[i]) for i in range(len(cleanAdvantages))]
-    top.sort()
+    top = [(advantages.count(adv), adv) for adv in cleanAdvantages]
+    top = sorted(top)[::-1][:10]
+    top = [x[1] for x in top]
 
     cleanDisAdvantages = disAdvantages.copy()
     cleanDisAdvantages = list(set(cleanDisAdvantages))
-    bot = [advantages.count(cleanDisAdvantages[i]) for i in range(len(cleanDisAdvantages))]
-    bot.sort()
-
+    bot = [(disAdvantages.count(adv), adv) for adv in cleanDisAdvantages]
+    bot = sorted(bot)[::-1][:10]
+    bot = [x[1] for x in bot]
     return top, bot
