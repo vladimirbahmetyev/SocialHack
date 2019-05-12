@@ -8,3 +8,5 @@ hackaton/\.idea/hackaton\.iml
 hackaton/__pycache__/
 
 hackaton/graph\.png
+
+hackaton/\.idea/
