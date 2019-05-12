@@ -155,11 +155,12 @@ class Example(QWidget):
 
                 self.totalSpam = QLineEdit(self)
                 self.totalSpam.setStyleSheet("QLineEdit {color:rgba(96, 2, 62, 1)}")
+                self.totalSpam.resize(500, 70)
                 self.totalSpam.setReadOnly(True)
                 self.totalSpam.setFrame(False)
                 self.totalSpam.setFont(self.font)
                 self.totalSpam.setText("Invalid reviews: " + str(round(spamers)) + "% from " + str(len(uW)) + " users")
-                self.totalSpam.move(1300, 595)
+                self.totalSpam.move(1015, 595)
                 self.totalSpam.show()
 
             self.rightSquare.hide()
