@@ -1,15 +1,11 @@
 import sys
 
-from PyQt5 import QtGui
-from PyQt5.QtCore import QTimer
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
-from orgSysCounter import calcOrgRait, frontend
-
-import numpy as np
-import matplotlib as mpl
 import matplotlib.pyplot as plt
-import math
+from PyQt5.QtCore import QTimer
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+from orgSysCounter import calcOrgRait
 
 
 class PicButton(QAbstractButton):
@@ -151,19 +147,6 @@ class Example(QWidget):
                 self.graph.setPixmap(QPixmap("graph.png"))
                 self.graph.move(1090, 100)
                 self.graph.show()
-
-                # sup = []
-                # n = len(uW)
-                # for i in range(n):
-                #     count = 0
-                #     for j in range(n):
-                #         if uW[j] >= i / n and uW[j] < (i + 1) / n:
-                #             count += 1
-                #     sup.append(count)
-                # x = np.arange(0, 1, 1 / n)
-                # plt.plot(x, sup)
-                # plt.show()
-
                 spam = 0
                 for w in uW:
                     if w < 0.3:
@@ -181,8 +164,6 @@ class Example(QWidget):
 
             self.rightSquare.hide()
             self.doneSquare.show()
-
-        # print(key, source)
 
     def changeItem(self):
         self.goClicked.hide()

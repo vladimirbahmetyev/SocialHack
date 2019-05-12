@@ -6,8 +6,6 @@ import codecs
 
 def getPosts(url: str, query: str, spq: int = 0, spu: int = 3):
     browser = webdriver.Chrome()
-    # url = "https://twitter.com/search?q="
-    # query = "мтс"
 
     browser.get(url + query)
     body = browser.find_element_by_tag_name("body")
