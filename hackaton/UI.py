@@ -104,11 +104,6 @@ class Example(QWidget):
         self.doneSquare.move(840, 0)
         self.doneSquare.hide()
 
-        # self.totalSpam = QLineEdit(self)
-        # self.totalSpam.setReadOnly(True)
-        # self.totalSpam.setFrame(False)
-        # self.totalSpam.setFont(self.font)
-
         self.setWindowIcon(QIcon('images/minilogo.png'))
 
         self.resize(1980, 1000)
@@ -152,10 +147,8 @@ class Example(QWidget):
                 print(rating)                                                       # rating -- рейтинг поискового запроса
                 plt.hist(tL)
                 plt.savefig("graph.png")
-                plt.show()
                 self.graph = QLabel(self)
                 self.graph.setPixmap(QPixmap("graph.png"))
-                # self.graph.resize(530, 400)
                 self.graph.move(1090, 100)
                 self.graph.show()
 
@@ -182,8 +175,8 @@ class Example(QWidget):
                 self.totalSpam.setReadOnly(True)
                 self.totalSpam.setFrame(False)
                 self.totalSpam.setFont(self.font)
-                self.totalSpam.setText(str(round(spamers)))
-                self.totalSpam.move(1525, 595)
+                self.totalSpam.setText("Invalid reviews: " + str(round(spamers)) + "% from " + str(len(uW)) + " users")
+                self.totalSpam.move(1300, 595)
                 self.totalSpam.show()
 
             self.rightSquare.hide()
