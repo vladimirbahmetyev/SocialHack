@@ -1,13 +1,15 @@
 import sys
 
+from PyQt5 import QtGui
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-from orgSysCounter import calcOrgRait
+from orgSysCounter import calcOrgRait, frontend
 
-# import matplotlib as mpl
-# import matplotlib.pyplot as plt
-# import math
+import numpy as np
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import math
 
 
 class PicButton(QAbstractButton):
@@ -49,6 +51,7 @@ class Example(QWidget):
         keywordPic.move(120, 290)
 
         self.keywordInput = QLineEdit(self)
+        self.keywordInput.setStyleSheet("QLineEdit {color:rgba(96, 2, 62, 1)}")
         self.keywordInput.move(170, 300)
         self.keywordInput.resize(500, 70)
         self.keywordInput.setFrame(False)
@@ -63,6 +66,7 @@ class Example(QWidget):
         resourcePic.move(120, 490)
 
         self.resourceInput = QLineEdit(self)
+        self.resourceInput.setStyleSheet("QLineEdit {color:rgba(96, 2, 62, 1)}")
         self.resourceInput.move(170, 500)
         self.resourceInput.resize(440, 70)
         self.resourceInput.setFrame(False)
@@ -82,9 +86,9 @@ class Example(QWidget):
         self.goClicked.move(330, 730)
         self.goClicked.hide()
 
-        self.wrongData = QLabel(self)
-        self.wrongData.setPixmap(QPixmap("images/wrong.png"))
-        self.wrongData.move(240, 650)
+        # self.wrongData = QLabel(self)
+        # self.wrongData.setPixmap(QPixmap("images/wrong.png"))
+        # self.wrongData.move(240, 650)
 
         oImage = QImage("images/back.png")
         palette = QPalette()
@@ -100,12 +104,17 @@ class Example(QWidget):
         self.doneSquare.move(840, 0)
         self.doneSquare.hide()
 
-        self.setWindowIcon(QIcon('images/kaka.jpg'))
+        # self.totalSpam = QLineEdit(self)
+        # self.totalSpam.setReadOnly(True)
+        # self.totalSpam.setFrame(False)
+        # self.totalSpam.setFont(self.font)
+
+        self.setWindowIcon(QIcon('images/minilogo.png'))
 
         self.resize(1980, 1000)
         self.center()
 
-        self.setWindowTitle('Супер прилога')
+        self.setWindowTitle('StatFinder')
         self.show()
 
     def center(self):
@@ -133,16 +142,54 @@ class Example(QWidget):
             checkSource = False
 
         if not checkSource:
-            self.wrongData.show()
+            # self.wrongData.show()
             print("aaa")
         else:
-            self.wrongData.close()
+            # self.wrongData.close()
             if source.lower() == "twitter":
-                calcOrgRait("https://twitter.com/search?q=", key)
+                rating, uW, tL = calcOrgRait("https://twitter.com/search?q=", key)  # uW -- список весов юзеров
+                                                                                    # tL -- список тональностей комментариев
+                print(rating)                                                       # rating -- рейтинг поискового запроса
+                plt.hist(tL)
+                plt.savefig("graph.png")
+                plt.show()
+                self.graph = QLabel(self)
+                self.graph.setPixmap(QPixmap("graph.png"))
+                # self.graph.resize(530, 400)
+                self.graph.move(1090, 100)
+                self.graph.show()
+
+                # sup = []
+                # n = len(uW)
+                # for i in range(n):
+                #     count = 0
+                #     for j in range(n):
+                #         if uW[j] >= i / n and uW[j] < (i + 1) / n:
+                #             count += 1
+                #     sup.append(count)
+                # x = np.arange(0, 1, 1 / n)
+                # plt.plot(x, sup)
+                # plt.show()
+
+                spam = 0
+                for w in uW:
+                    if w < 0.3:
+                        spam += 1
+                spamers = spam / len(uW)
+
+                self.totalSpam = QLineEdit(self)
+                self.totalSpam.setStyleSheet("QLineEdit {color:rgba(96, 2, 62, 1)}")
+                self.totalSpam.setReadOnly(True)
+                self.totalSpam.setFrame(False)
+                self.totalSpam.setFont(self.font)
+                self.totalSpam.setText(str(round(spamers)))
+                self.totalSpam.move(1525, 595)
+                self.totalSpam.show()
+
             self.rightSquare.hide()
             self.doneSquare.show()
 
-        print(key, source)
+        # print(key, source)
 
     def changeItem(self):
         self.goClicked.hide()
@@ -158,6 +205,7 @@ class Example(QWidget):
         self.resourceMenu.show()
 
         self.menuChoice = QLineEdit(self)
+        self.menuChoice.setStyleSheet("QLineEdit {color:rgba(96, 2, 62, 1)}")
         self.menuChoice.setText(self.resourceInput.text())
         self.menuChoice.setReadOnly(True)
         self.menuChoice.move(170, 500)
