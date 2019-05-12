@@ -173,7 +173,7 @@ class Example(QWidget):
 
                 spam = 0
                 for w in uW:
-                    if w < 1.5:
+                    if w < 0.15:
                         spam += 1
                 spamers = spam / len(uW)
 
@@ -189,7 +189,7 @@ class Example(QWidget):
             self.rightSquare.hide()
             self.doneSquare.show()
 
-        print(key, source)
+        # print(key, source)
 
     def changeItem(self):
         self.goClicked.hide()
